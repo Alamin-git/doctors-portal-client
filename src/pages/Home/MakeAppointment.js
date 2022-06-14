@@ -1,6 +1,6 @@
 import React from "react";
-import doctor from "../../assets/images/doctor-small.png";
 import appointment from "../../assets/images/appointment.png";
+import doctor from "../../assets/images/doctor-small.png";
 import PrimaryBtn from "../Shared/Button/PrimaryBtn";
 
 const MakeAppointment = () => {
@@ -10,7 +10,7 @@ const MakeAppointment = () => {
          style={{ backgroundImage: `url(${appointment})` }}
       >
          <div class="flex-1 ml-11 px-8  hidden lg:block">
-            <img src={doctor} class="w-[28.625rem] mt-[-100px]" />
+            <img src={doctor} class="w-[37.875rem] mt-[-100px]" />
          </div>
          <div className="flex-1 py-12 text-center mx-12 lg:mr-11 lg:text-left">
             <h1 className="text-xl font-bold text-primary my-4">Appointment</h1>
