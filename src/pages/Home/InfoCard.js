@@ -1,4 +1,3 @@
-import React from "react";
 
 const InfoCard = ({info}) => {
     const {img, title, body , bgClass} = info;
@@ -11,8 +10,8 @@ const InfoCard = ({info}) => {
                alt="Album"
             />
          </figure>
-         <div class="card-body ">
-            <h2 class="card-title">{title}</h2>
+         <div className="card-body ">
+            <h2 className="card-title">{title}</h2>
             <p>{body}</p>
          </div>
       </div>

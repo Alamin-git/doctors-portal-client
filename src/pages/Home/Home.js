@@ -8,17 +8,11 @@ import Testimonial from "./Testimonial";
 const Home = () => {
    return (
       <>
-         <div className="mx-11">
-            <Banner />
-            <Info />
-            <Services />
-         </div>
-         <>
-            <MakeAppointment />
-         </>
-         <div className="mx-11">
-             <Testimonial/>
-         </div>
+         <Banner />
+         <Info />
+         <Services />
+         <MakeAppointment />
+         <Testimonial />
       </>
    );
 };
