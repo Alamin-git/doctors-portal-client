@@ -5,7 +5,7 @@ import PrimaryBtn from "../Shared/Button/PrimaryBtn";
 const ServiceHero = () => {
    return (
       <div className="hero min-h-screen my-32">
-         <div className="hero-content flex-col lg:flex-row p-20">
+         <div className="hero-content flex-col lg:flex-row lg:p-20">
             <img
                src={treatment}
                className="max-w-md rounded-lg shadow-2xl"
