@@ -1,13 +1,20 @@
-import React from "react";
 
-const Service = ({ service }) => {
+const Service = ({ service, setTreatment }) => {
    return (
       <div class="card bg-base-100 shadow-xl text-center">
          <div class="card-body">
-            <h2 class="card-title text-primary justify-center text-lg">{service.name}</h2>
+            <h2 class="card-title text-primary justify-center text-lg">
+               {service.name}
+            </h2>
             <p>{service.slots[1]}</p>
             <div class="card-actions justify-center mt-8">
-               <button class="btn btn-primary">Book Appointment</button>
+               <label
+                  for="booking-modal"
+                  class="btn btn-primary text-white font-bold bg-gradient-to-r from-secondary to-primary"
+                  onClick={() => setTreatment(service)}
+               >
+                  Book Appointment
+               </label>
             </div>
          </div>
       </div>

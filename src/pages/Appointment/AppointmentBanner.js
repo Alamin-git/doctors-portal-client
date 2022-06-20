@@ -4,6 +4,7 @@ import chair from "../../assets/images/chair.png";
 import "react-day-picker/dist/style.css";
 
 const AppointmentBanner = ({selected, setSelected}) => {
+  
    return (
       <div class="hero min-h-screen bg-[url('/src/assets/images/bg.png')] bg-cover">
          <div class="hero-content flex-col lg:flex-row-reverse gap-32">
