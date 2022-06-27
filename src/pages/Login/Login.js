@@ -5,7 +5,6 @@ import auth from '../../firebase.init'
 const Login = () => {
    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-
    return (
       <div className="mt-16 h-screen">
          <div className="mx-auto max-w-sm p-5 border rounded-lg">
