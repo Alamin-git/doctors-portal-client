@@ -37,11 +37,11 @@ const ContactUs = () => {
                      <input
                         type="text"
                         placeholder="Your message"
-                        className="input input-bordered h-10"
+                        className="input input-bordered"
                      />
                   </div>
                   <div className="form-control">
-                     <PrimaryButton>Login</PrimaryButton>
+                     <PrimaryButton>Submit</PrimaryButton>
                   </div>
                </div>
             </div>
