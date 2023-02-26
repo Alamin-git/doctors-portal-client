@@ -5,7 +5,7 @@ import PrimaryButton from '../../../Components/PrimaryButton/PrimaryButton';
 const MidBanner = () => {
     return (
         <div
-         className="hero lg:px-24"
+         className="hero lg:px-24 mx-5"
       >
          <div className="hero-content gap-16 flex-col lg:flex-row">
             <img

@@ -10,7 +10,7 @@ const ContactUs = () => {
             backgroundImage: `url(${appointment})`,
          }}
       >
-         <div className="hero-content">
+         <div className="hero-content mx-5">
             <div className="card w-full  max-w-md">
                <div className="text-center">
                   <h4 className="text-primary text-xl font-bold">Contact Us</h4>

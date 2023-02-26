@@ -8,19 +8,19 @@ const Navbar = () => {
             <Link to='/'>Home</Link>
          </li>
          <li>
-            <Link to='/About'>About</Link>
+            <Link to='/about'>About</Link>
          </li>
          <li>
-            <Link to='/Appointment'>Appointment</Link>
+            <Link to='/appointment'>Appointment</Link>
          </li>
          <li>
-            <Link to='/Reviews'>Reviews</Link>
+            <Link to='/reviews'>Reviews</Link>
          </li>
          <li>
-            <Link to='/ContactUs'>Contact Us</Link>
+            <Link to='/contactUs'>Contact Us</Link>
          </li>
          <li>
-            <Link to='/Login'>Login</Link>
+            <Link to='/login'>Login</Link>
          </li>
       </React.Fragment>
    );
