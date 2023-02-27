@@ -13,7 +13,7 @@ const AppointmentBanner = ({selectedDate, setSelectedDate}) => {
             backgroundSize: "cover",
          }}
       >
-         <div className="hero mx-5">
+         <div className="hero">
             <div className="hero-content flex-col lg:flex-row-reverse gap-28">
                <img
                   src={chair}
