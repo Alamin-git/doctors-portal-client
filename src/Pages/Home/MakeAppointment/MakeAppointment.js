@@ -8,7 +8,7 @@ const MakeAppointment = () => {
       <section className="mt-40" style={{ 
         backgroundImage: `url(${appointment})`
         }}>
-         <div className="hero lg:px-20 mx-5">
+         <div className="hero lg:px-20">
             <div className="hero-content gap-6 flex-col lg:flex-row p-0">
                <img
                   src={doctor}

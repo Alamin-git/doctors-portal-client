@@ -34,11 +34,10 @@ const ContactUs = () => {
                      />
                   </div>
                   <div className="form-control">
-                     <input
-                        type="text"
+                     <textarea
+                        className="textarea textarea-bordered h-24"
                         placeholder="Your message"
-                        className="input input-bordered"
-                     />
+                     ></textarea>
                   </div>
                   <div className="form-control">
                      <PrimaryButton>Submit</PrimaryButton>
