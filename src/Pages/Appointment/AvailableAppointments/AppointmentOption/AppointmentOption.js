@@ -3,7 +3,7 @@ import React from "react";
 const AppointmentOption = ({ appointmentOption, setTreatment }) => {
    const { name, slots } = appointmentOption;
    return (
-      <div className="card w-[425px] bg-base-100 shadow-xl">
+      <div className="card w-auto bg-base-100 shadow-xl">
          <div className="card-body items-center text-center">
             <h2 className="card-title text-xl text-secondary font-semibold">
                {name}
