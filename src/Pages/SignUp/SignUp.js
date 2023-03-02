@@ -2,23 +2,43 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
    const {
       register,
       formState: { errors },
       handleSubmit,
    } = useForm();
 
-   const handleLogin = (data) => {
+   const handleSignUp = (data) => {
       console.log(data);
    };
+
+
+
    return (
       <div className="min-h-screen hero">
          <div>
             <div className="card w-full md:w-96 max-w-sm shadow-2xl">
                <div className="card-body">
-                  <h2 className="text-center text-xl font-bold">Login</h2>
-                  <form onSubmit={handleSubmit(handleLogin)}>
+                  <h2 className="text-center text-xl font-bold">Sign Up</h2>
+                  <form onSubmit={handleSubmit(handleSignUp)}>
+                     <div className="form-control">
+                        <label className="label">
+                           <span className="label-text">Name</span>
+                        </label>
+                        <input
+                           type="text"
+                           {...register("name", {
+                              required: "Name is required",
+                           })}
+                           className="input input-bordered"
+                        />
+                        {errors.name && (
+                           <p className="text-red-600" role="alert">
+                              {errors.name?.message}
+                           </p>
+                        )}
+                     </div>
                      <div className="form-control">
                         <label className="label">
                            <span className="label-text">Email</span>
@@ -26,7 +46,7 @@ const Login = () => {
                         <input
                            type="email"
                            {...register("email", {
-                              required: "email is required",
+                              required: "Email is required",
                            })}
                            className="input input-bordered"
                         />
@@ -43,8 +63,13 @@ const Login = () => {
                         <input
                            type="password"
                            {...register("password", {
-                              required: "password is required",
-                              minLength: {value:6, message:'password must be 6 characters or longer'},
+                              required: "Password is required",
+                              minLength: {
+                                 value: 8,
+                                 message:
+                                    "password must be 8 characters or longer",
+                              },
+                              pattern: { value:/(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}/, message: 'Password have to be strong'}
                            })}
                            className="input input-bordered"
                         />
@@ -53,28 +78,20 @@ const Login = () => {
                               {errors.password?.message}
                            </p>
                         )}
-                        <label className="label">
-                           <a
-                              href="/"
-                              className="label-text-alt link link-hover"
-                           >
-                              Forgot password?
-                           </a>
-                        </label>
                      </div>
                      <div className="form-control mt-6">
                         <input
                            className="btn btn-accent"
-                           value="Login"
+                           value="Sign Up"
                            type="submit"
                         />
                      </div>
                   </form>
                   <div className="mt-6">
                      <p>
-                        New to Doctors Portal? {""}
-                        <Link to="/signUp" className="link link-hover text-secondary">
-                           Create new account
+                     Already have an account? {""}
+                        <Link to="/login" className="link link-hover text-secondary">
+                         Login
                         </Link>
                      </p>
                   </div>
@@ -87,4 +104,4 @@ const Login = () => {
    );
 };
 
-export default Login;
+export default SignUp;
