@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const SignUp = () => {
+   const { createUser } = useContext(AuthContext);
+
    const {
       register,
       formState: { errors },
@@ -11,8 +14,13 @@ const SignUp = () => {
 
    const handleSignUp = (data) => {
       console.log(data);
+      createUser(data.email, data.password)
+      .then(result => {
+         const user = result.user;
+         console.log(user);
+      })
+      .catch(error => console.log(error));
    };
-
 
 
    return (
@@ -69,7 +77,10 @@ const SignUp = () => {
                                  message:
                                     "password must be 8 characters or longer",
                               },
-                              pattern: { value:/(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}/, message: 'Password have to be strong'}
+                              pattern: {
+                                 value: /(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}/,
+                                 message: "Password have to be strong",
+                              },
                            })}
                            className="input input-bordered"
                         />
@@ -89,14 +100,19 @@ const SignUp = () => {
                   </form>
                   <div className="mt-6">
                      <p>
-                     Already have an account? {""}
-                        <Link to="/login" className="link link-hover text-secondary">
-                         Login
+                        Already have an account? {""}
+                        <Link
+                           to="/login"
+                           className="link link-hover text-secondary"
+                        >
+                           Login
                         </Link>
                      </p>
                   </div>
                   <div className="divider">OR</div>
-                  <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
+                  <button className="btn btn-outline">
+                     CONTINUE WITH GOOGLE
+                  </button>
                </div>
             </div>
          </div>
