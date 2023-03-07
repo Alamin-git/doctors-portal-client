@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
+   const { signIn } = useContext(AuthContext);
+
    const {
       register,
       formState: { errors },
       handleSubmit,
    } = useForm();
 
+   const [loginError, setLoginError] = useState("");
    const handleLogin = (data) => {
       console.log(data);
+      setLoginError("");
+      signIn(data.email, data.password)
+         .then((result) => {
+            const user = result.user;
+            console.log(user);
+         })
+         .catch((error) => {
+            console.log(error.messages);
+            setLoginError(error.message);
+         });
    };
+
    return (
       <div className="min-h-screen hero">
          <div>
@@ -44,7 +59,11 @@ const Login = () => {
                            type="password"
                            {...register("password", {
                               required: "password is required",
-                              minLength: {value:6, message:'password must be 6 characters or longer'},
+                              minLength: {
+                                 value: 6,
+                                 message:
+                                    "password must be 6 characters or longer",
+                              },
                            })}
                            className="input input-bordered"
                         />
@@ -53,6 +72,7 @@ const Login = () => {
                               {errors.password?.message}
                            </p>
                         )}
+                        
                         <label className="label">
                            <a
                               href="/"
@@ -69,17 +89,27 @@ const Login = () => {
                            type="submit"
                         />
                      </div>
+                     {loginError && (
+                           <p className="text-red-600" role="alert">
+                              {loginError}
+                           </p>
+                        )}
                   </form>
                   <div className="mt-6">
                      <p>
                         New to Doctors Portal? {""}
-                        <Link to="/signUp" className="link link-hover text-secondary">
+                        <Link
+                           to="/signUp"
+                           className="link link-hover text-secondary"
+                        >
                            Create new account
                         </Link>
                      </p>
                   </div>
                   <div className="divider">OR</div>
-                  <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
+                  <button className="btn btn-outline">
+                     CONTINUE WITH GOOGLE
+                  </button>
                </div>
             </div>
          </div>
