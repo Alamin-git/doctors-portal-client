@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Navbar = () => {
-   const { user } = useContext(AuthContext);
+   const { user,logOut } = useContext(AuthContext);
+   const handelLogOut = () =>{
+      logOut()
+      .then(() => {})
+      .catch(err =>console.log(err))
+   }
 
    const menuItems = (
       <React.Fragment>
@@ -24,7 +29,7 @@ const Navbar = () => {
          </li>
          {user?.uid ? (
             <li>
-               <Link to="/login">Sign Out</Link>
+               <Link onClick={handelLogOut} to="/login">Sign Out</Link>
             </li>
          ) : (
             <li>
