@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import React, { useState } from "react";
+import Loading from "../../Shared/Loading/Loading";
 import BookingModal from "../BookingModal/BookingModal";
 import AppointmentOption from "./AppointmentOption/AppointmentOption";
 
 const AvailableAppointments = ({ selectedDate }) => {
    const [treatment, setTreatment] = useState(null);
 
+
+   const date = format(selectedDate, 'PPP')
+
    // const [appointmentOptions, setAppointmentOptions] = useState([]);
-   const { data: appointmentOptions, isLoading } = useQuery({
-      queryKey: ["appointmentOptions"],
+   const { data: appointmentOptions, isLoading, refetch } = useQuery({
+      queryKey: ["appointmentOptions", date],
       queryFn: async () => {
-         const res = await fetch("http://localhost:5000/appointmentOptions");
+         const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`);
          const data = await res.json();
          return data;
       },
@@ -20,7 +24,7 @@ const AvailableAppointments = ({ selectedDate }) => {
    });
 
    if (isLoading) {
-      return <progress className="progress w-56"></progress>;
+      return <Loading/>;
    }
 
    // useEffect(() => {
@@ -48,6 +52,7 @@ const AvailableAppointments = ({ selectedDate }) => {
                selectedDate={selectedDate}
                treatment={treatment}
                setTreatment={setTreatment}
+               refetch={refetch}
             ></BookingModal>
          )}
          {/* jehetu default value null deya hoiche tai condition deya holo, jodi treatment a kichu thake taholei modal asbe. eita na korle error dey. or default value [] dite hobe */}
