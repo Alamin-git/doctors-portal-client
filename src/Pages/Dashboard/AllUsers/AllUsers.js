@@ -15,14 +15,14 @@ const AllUsers = () => {
    const handelMakeAdmin = (id) => {
       fetch(`http://localhost:5000/users/admin/${id}`, {
          method: "PUT",
-         headers:{
-            authorization: `bearer ${localStorage.getItem('accessToken')}`
-         }
+         headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+         },
       })
          .then((res) => res.json())
          .then((data) => {
-            if(data.modifiedCount > 0 ){
-               toast.success('Make admin successful.')
+            if (data.modifiedCount > 0) {
+               toast.success("Make admin successful.");
                refetch();
             }
          });
@@ -51,12 +51,14 @@ const AllUsers = () => {
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>
-                          { user?.role !== 'admin' && <button
-                              onClick={() => handelMakeAdmin(user._id)}
-                              className="btn btn-xs btn-primary"
-                           >
-                              Make Admin
-                           </button>}
+                           {user?.role !== "admin" && (
+                              <button
+                                 onClick={() => handelMakeAdmin(user._id)}
+                                 className="btn btn-xs btn-primary"
+                              >
+                                 Make Admin
+                              </button>
+                           )}
                         </td>
                         <td>
                            <button className="btn btn-xs btn-warning">
