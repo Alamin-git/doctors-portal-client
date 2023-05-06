@@ -23,7 +23,7 @@ const MyAppointment = () => {
    return (
       <div>
          <div className="mb-5">
-            <h3 className="text-2xl">My Appointment</h3>
+            <h3 className="text-2xl mb-6">My Appointment</h3>
          </div>
          <div className="overflow-x-auto">
             <table className="table w-full">

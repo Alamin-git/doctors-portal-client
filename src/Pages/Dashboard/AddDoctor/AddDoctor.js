@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../../Shared/Loading/Loading";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const AddDoctor = () => {
@@ -10,9 +12,49 @@ const AddDoctor = () => {
       formState: { errors },
       handleSubmit,
    } = useForm();
+
+   const imageHostKey = process.env.REACT_APP_imgbb_key;
+   const navigate = useNavigate();
+
    const handleAddDoctors = (data) => {
       console.log(data);
+      const image = data.image[0];
+      const formData = new FormData();
+      formData.append('image', image);
+      const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+      fetch(url, {
+         method:'POST',
+         body:formData
+      })
+      .then(res => res.json())
+      .then(imgData => {
+         if(imgData.success){
+            const doctor = {
+               name: data.name,
+               email: data.email,
+               specialty: data.specialty,
+               image: imgData.data.url
+            }
+
+            // save doctors information to the database
+            fetch('http://localhost:5000/doctors', {
+               method: 'POST',
+               headers: {
+                  'content-type': 'application/json',
+                  authorization: `bearer ${localStorage.getItem('accessToken')}`
+               },
+               body: JSON.stringify(doctor)
+            })
+            .then(res => res.json())
+            .then(result => {
+               console.log(result);
+               toast.success(`${data.name} is added successfully`);
+               navigate('/dashboard/manage-doctors')
+            })
+         }
+      })
    };
+
 
    const { data: specialties , isLoading} = useQuery({ //data: new name
       queryKey: ["specialty"],
@@ -85,7 +127,7 @@ const AddDoctor = () => {
                </label>
                <input
                   type="file"
-                  {...register("img", {
+                  {...register("image", {
                      required: "Photo is required",
                   })}
                   className="input input-bordered"
@@ -107,5 +149,13 @@ const AddDoctor = () => {
       </div>
    );
 };
+
+
+/**
+ * Three places to store images
+ * 1. Third party images hosting server
+ * 2. File system of my server
+ * 3. mongodb (database)
+ */
 
 export default AddDoctor;
