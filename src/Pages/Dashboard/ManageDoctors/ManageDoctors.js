@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Loading from "../../Shared/Loading/Loading";
 
 const ManageDoctors = () => {
-   const { data: doctors } = useQuery({
+   const { data: doctors, isLoading } = useQuery({
       queryKey: ["doctors"],
       queryFn: async () => {
          try {
@@ -18,6 +19,9 @@ const ManageDoctors = () => {
          } catch (error) {}
       },
    });
+   if(isLoading){
+      return <Loading/>
+   }
 
    return (
       <div>
@@ -31,20 +35,18 @@ const ManageDoctors = () => {
                      <th>Name</th>
                      <th>Email</th>
                      <th>Specialty</th>
+                     <th>Action</th>
                   </tr>
                </thead>
                <tbody>
-                  {doctors.map((doctor , i) => (
+                  {doctors.map((doctor, i) => (
                      <tr className="hover" key={doctor._id}>
-                        <th>{i+1}</th>
+                        <th>{i + 1}</th>
                         <td>
                            <div className="flex items-center space-x-3">
                               <div className="avatar">
                                  <div className="mask mask-squircle w-12 h-12">
-                                    <img
-                                       src={`${doctor.image}`}
-                                       alt=""
-                                    />
+                                    <img src={`${doctor.image}`} alt="" />
                                  </div>
                               </div>
                            </div>
@@ -52,6 +54,7 @@ const ManageDoctors = () => {
                         <td className="font-bold">{doctor.name}</td>
                         <td>{doctor.email}</td>
                         <td>{doctor.specialty}</td>
+                        <td><button className="btn btn-xs btn-error">Delete</button></td>
                      </tr>
                   ))}
                </tbody>
